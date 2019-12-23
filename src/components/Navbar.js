@@ -129,7 +129,7 @@ export default function Dashboard() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title} align="center">
+          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title} >
             Hippie Headquarters
           </Typography>
           <Button color="secondary" variant="contained">Login</Button>
