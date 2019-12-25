@@ -116,9 +116,8 @@ export default function Dashboard() {
   };
   // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
+  return [
+      <CssBaseline />,
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
@@ -130,12 +129,12 @@ export default function Dashboard() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title} align="center">
+          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title} >
             Hippie Headquarters
           </Typography>
           <Button color="secondary" variant="contained">Login</Button>
         </Toolbar>
-      </AppBar>
+      </AppBar>,
       
       <Drawer
         variant="permanent"
@@ -155,32 +154,7 @@ export default function Dashboard() {
         <List>{secondaryListItems}</List>
       </Drawer>
   
-        {/* <Container maxWidth="lg" className={classes.container}>
-          
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                 <Chart /> 
-              </Paper>
-            </Grid>
-
-           
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits /> 
-              </Paper>
-            </Grid>
-            
-            Recent Orders 
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders /> 
-              </Paper>
-            </Grid>
-          </Grid>
-    
-        </Container> */}
       
-    </div>
-  );
+   
+  ];
 }
