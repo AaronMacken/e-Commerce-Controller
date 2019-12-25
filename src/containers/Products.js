@@ -6,7 +6,7 @@ import { Grid } from '@material-ui/core';
 import { Paper } from '@material-ui/core';
 import { Input } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
-import CartItem from './CartItem';
+import ProductItem from './ProductItem';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -55,20 +55,20 @@ export default function Products() {
 
                         <Grid item xs={12} className={classes.gridItem}>
                             <Paper>
-                                <CartItem img="https://hemp-xr.com/wp-content/uploads/2019/12/hemp-xr-oil.jpg"
+                                <ProductItem img="https://hemp-xr.com/wp-content/uploads/2019/12/hemp-xr-oil.jpg"
                                 price={14.99} title="CBD Oil Product 1"/>
                             </Paper>
                         </Grid>
                         <Grid item xs={12} className={classes.gridItem}>
                             <Paper>
-                                <CartItem img="https://hemp-xr.com/wp-content/uploads/2019/12/hemp-xr-oil.jpg"
-                                price={14.99} title="CBD Oil Product 1"/>
+                                <ProductItem img="https://hemp-xr.com/wp-content/uploads/2019/12/hemp-xr-oil.jpg"
+                                price={20.99} title="CBD Oil Product 2"/>
                             </Paper>
                         </Grid>
                         <Grid item xs={12} className={classes.gridItem}>
                             <Paper>
-                                <CartItem img="https://hemp-xr.com/wp-content/uploads/2019/12/hemp-xr-oil.jpg"
-                                price={14.99} title="CBD Oil Product 1"/>
+                                <ProductItem img="https://hemp-xr.com/wp-content/uploads/2019/12/hemp-xr-oil.jpg"
+                                price={4.99} title="CBD Oil Product 3"/>
                             </Paper>
                         </Grid>
                         

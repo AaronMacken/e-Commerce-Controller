@@ -23,12 +23,6 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Add New Product" />
     </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-      <DeleteIcon />
-      </ListItemIcon>
-      <ListItemText primary="Remove Products" />
-    </ListItem>
     
   </div>
 );
