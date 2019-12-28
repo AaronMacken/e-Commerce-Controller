@@ -1,18 +1,73 @@
-import React, { Component } from 'react';
-import { Switch, Route, withRouter } from "react-router-dom";
-import Products from './Products';
-import ProductForm from '../components/ProductForm';
-import Login from '../components/Login';
+import React, { Component } from "react";
+import { Switch, Route, withRouter, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import Products from "./Products";
+import ProductForm from "../components/ProductForm";
+import AuthForm from "./AuthForm";
+import { authUser } from "../store/actions/auth";
+import { removeError } from "../store/actions/error";
+import withAuth from "../hocs/withAuth";
 
-export default class Main extends Component {
-    render() {
-        return (
-            <Switch>
-                <Route exact path="/" render={props => <Login {...props} />} />
-                <Route exact path="/products" render={props => <Products {...props} />} />
-                <Route exact path="/products/new" render={props => <ProductForm {...props} />} />
-            </Switch>
+const Main = props => {
+  const { authUser, errors, removeError, currentUser } = props;
+  return (
+    <Switch>
+      {/* Render a component along with the react router props */}
+      <Route exact path="/">
+        <Redirect to="/signin" />
+      </Route>
 
-        )
-    }
+      <Route
+        exact
+        path="/signin"
+        render={props => {
+          return (
+            <AuthForm
+              removeError={removeError}
+              // errors coming from mapStateToProps
+              errors={errors}
+              onAuth={authUser}
+              buttonText="Sign in"
+              heading="Sign in"
+              {...props}
+            />
+          );
+        }}
+      />
+      {/* This route contains a signUp prop - used for displaying additional fields on the authform component */}
+      <Route
+        exact
+        path="/signup"
+        render={props => {
+          return (
+            <AuthForm
+              removeError={removeError}
+              errors={errors}
+              onAuth={authUser}
+              signUp
+              buttonText="Sign up"
+              heading="Admin sign up"
+              {...props}
+            />
+          );
+        }}
+      />
+      {/* when this path is reached, a higher order component will be loaded 
+  (a function that wraps a component) */}
+      <Route path="/products" component={withAuth(Products)} />
+    </Switch>
+  );
+};
+
+// Redux state now made vailable as props
+function mapStateToProps(state) {
+  return {
+    currentUser: state.currentUser,
+    errors: state.errors
+  };
 }
+
+// pass in auth user as mapDispatchToProps
+export default withRouter(
+  connect(mapStateToProps, { authUser, removeError })(Main)
+);
