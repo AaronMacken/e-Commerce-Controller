@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
 import * as Yup from "yup";
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: "bold",
     marginTop: "1rem",
     marginLeft: ".5rem",
-    fontSize: '1.25rem'
+    fontSize: "1.25rem"
   },
   myInput: {
     padding: ".65rem .5rem",
@@ -61,20 +61,21 @@ const useStyles = makeStyles(theme => ({
     marginLeft: ".5rem"
   },
   submitButton: {
-      padding: '.5rem 1.25rem',
-      fontSize: '1rem',
-      borderRadius: '10px',
-      backgroundColor: '#3f51b5',
-      width: "100%",
-      margin: "auto",
-      marginTop: '1rem',
-      color: '#fff',
-      border: 'none',
-      fontWeight: 'bold'
+    padding: ".5rem 1.25rem",
+    fontSize: "1rem",
+    borderRadius: "10px",
+    backgroundColor: "#3f51b5",
+    width: "100%",
+    margin: "auto",
+    marginTop: "1rem",
+    color: "#fff",
+    border: "none",
+    fontWeight: "bold"
   }
 }));
 
 export default function ProductForm() {
+
   const classes = useStyles();
   return (
     <div className={classes.root}>

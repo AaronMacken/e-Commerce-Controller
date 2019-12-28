@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -7,6 +7,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { useInput } from "../services/useInputHook";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -31,6 +32,27 @@ const useStyles = makeStyles(theme => ({
 export default function SignIn(props) {
   const classes = useStyles();
   const { heading, buttonText, signUp, errors, history, removeError } = props;
+
+  const { value: email, bind: bindEmail, reset: resetEmail } = useInput("");
+  const {
+    value: password,
+    bind: bindPassword,
+    reset: resetPassword
+  } = useInput("");
+  const {
+    value: adminCode,
+    bind: bindAdminCode,
+    reset: resetAdminCode
+  } = useInput("");
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    alert(`Submitting Name ${email} ${password} ${adminCode}`);
+    resetEmail();
+    resetPassword();
+    resetAdminCode();
+}
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -41,7 +63,7 @@ export default function SignIn(props) {
         <Typography component="h1" variant="h5">
           {heading}
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -52,6 +74,7 @@ export default function SignIn(props) {
             name="email"
             autoComplete="email"
             autoFocus
+            {...bindEmail}
           />
           <TextField
             variant="outlined"
@@ -63,6 +86,7 @@ export default function SignIn(props) {
             type="password"
             id="password"
             autoComplete="current-password"
+            {...bindPassword}
           />
           {signUp && (
             <TextField
@@ -74,6 +98,7 @@ export default function SignIn(props) {
               label="Admin Code"
               type="password"
               id="adminCode"
+              {...bindAdminCode}
             />
           )}
           <Button
