@@ -54,7 +54,8 @@ const Main = props => {
       />
       {/* when this path is reached, a higher order component will be loaded 
   (a function that wraps a component) */}
-      <Route path="/products" component={withAuth(Products)} />
+      <Route exact path="/products" component={withAuth(Products)} />
+      <Route ecact path="/products/new" component={withAuth(ProductForm)} />
     </Switch>
   );
 };

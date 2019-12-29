@@ -31,9 +31,22 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn(props) {
   const classes = useStyles();
-  const { heading, buttonText, signUp, errors, history, removeError } = props;
+  const {
+    heading,
+    buttonText,
+    signUp,
+    errors,
+    history,
+    removeError,
+    onAuth
+  } = props;
 
-  const { value: email, bind: bindEmail, reset: resetEmail } = useInput("");
+  const {
+    value: username,
+    bind: bindUsername,
+    reset: resetUsername
+  } = useInput("");
+
   const {
     value: password,
     bind: bindPassword,
@@ -45,13 +58,27 @@ export default function SignIn(props) {
     reset: resetAdminCode
   } = useInput("");
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = evt => {
     evt.preventDefault();
-    alert(`Submitting Name ${email} ${password} ${adminCode}`);
-    resetEmail();
-    resetPassword();
-    resetAdminCode();
-}
+    const authType = signUp ? "signup" : "signin";
+    let formState = { username, password, adminCode };
+    props
+      .onAuth(authType, formState)
+      .then(() => {
+        props.history.push("/products");
+      })
+      .catch(() => {
+        resetUsername();
+        resetPassword();
+        resetAdminCode();
+        return;
+      });
+  };
+
+  // listen for a change in the route, if so -> use remove Error
+  history.listen(() => {
+    removeError();
+  });
 
   return (
     <Container component="main" maxWidth="xs">
@@ -71,10 +98,10 @@ export default function SignIn(props) {
             fullWidth
             id="email"
             label="Email Address"
-            name="email"
+            name="username"
             autoComplete="email"
             autoFocus
-            {...bindEmail}
+            {...bindUsername}
           />
           <TextField
             variant="outlined"
@@ -100,6 +127,9 @@ export default function SignIn(props) {
               id="adminCode"
               {...bindAdminCode}
             />
+          )}
+          {errors.message && (
+            <div style={{ color: "red" }}>{errors.message}</div>
           )}
           <Button
             type="submit"
