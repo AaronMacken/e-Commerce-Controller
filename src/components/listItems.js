@@ -1,29 +1,33 @@
-import React from 'react';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-// import ListSubheader from '@material-ui/core/ListSubheader';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-// import AssignmentIcon from '@material-ui/icons/Assignment';
-import DeleteIcon from '@material-ui/icons/Delete';
-import AddIcon from '@material-ui/icons/Add';
-import LanguageIcon from '@material-ui/icons/Language';
+import React from "react";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import AddIcon from "@material-ui/icons/Add";
+import LanguageIcon from "@material-ui/icons/Language";
+import { Link } from "react-router-dom";
+
+const linkStyle = { color: "rgba(0,0,0,.87)", textDecoration: "none" };
 
 export const mainListItems = (
   <div>
-    <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="See Products" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AddIcon />
-      </ListItemIcon>
-      <ListItemText primary="Add New Product" />
-    </ListItem>
-    
+    <Link to="/products" style={linkStyle}>
+      <ListItem button>
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary="See Products" />
+      </ListItem>
+    </Link>
+
+    <Link to="/products/new" style={linkStyle}>
+      <ListItem button>
+        <ListItemIcon>
+          <AddIcon />
+        </ListItemIcon>
+        <ListItemText primary="Add New Product" />
+      </ListItem>
+    </Link>
   </div>
 );
 

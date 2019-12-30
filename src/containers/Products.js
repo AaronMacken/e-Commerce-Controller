@@ -58,6 +58,7 @@ function Products(props) {
       </Paper>
     </Grid>
   ));
+
   return (
     <div className={classes.root}>
       <Navbar></Navbar>
@@ -85,14 +86,16 @@ function Products(props) {
         </div>
 
         <Container maxWidth="lg" className={classes.container}>
+          {/* Grid */}
           <Grid container spacing={3}>
-            {/* grid items */}
+            {/* Searchbar */}
             <Grid item xs={12}>
               <Input
                 placeholder="Search Products"
                 className={classes.searchBar}
               ></Input>
             </Grid>
+            {/* product items */}
             {productList}
           </Grid>
         </Container>
