@@ -45,7 +45,7 @@ function Products(props) {
   // hook to make api request to get all products in the database
   useEffect(() => {
     fetchProducts();
-  });
+  }, []);
   const productList = products.map(p => (
     <Grid item xs={12} className={classes.gridItem}>
       <Paper>

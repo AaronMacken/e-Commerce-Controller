@@ -3,7 +3,9 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
 import * as Yup from "yup";
 import Navbar from "../components/Navbar";
-import { Grid, Paper, Typography, Container, Box } from "@material-ui/core";
+import { Paper, Typography, Container, Box } from "@material-ui/core";
+import { createProduct } from "../store/actions/products";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -74,8 +76,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ProductForm() {
-
+function ProductForm(props) {
+  const { history, createProduct } = props;
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -105,8 +107,6 @@ export default function ProductForm() {
           <Paper className={classes.formPaper}>
             <Formik
               initialValues={{
-                email: "",
-                password: "",
                 productName: "",
                 price: null
               }}
@@ -117,14 +117,14 @@ export default function ProductForm() {
                   .typeError("You must enter a number")
                   .positive("Must be a positive number")
               })}
-              onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
-                  setSubmitting(false);
-                }, 400);
+
+              onSubmit={(values, { resetForm }) => {
+                createProduct({title: values.productName, price: values.price});
+                resetForm({});
+                history.push('/products');
               }}
             >
-              {({ isSubmitting }) => (
+              {() => (
                 <Form className={classes.formColumn}>
                   <Box className={classes.inputWrapper}>
                     <label htmlFor="productName" className={classes.myLabel}>
@@ -162,11 +162,7 @@ export default function ProductForm() {
                     />
                   </Box>
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className={classes.submitButton}
-                  >
+                  <button type="submit" className={classes.submitButton}>
                     Submit
                   </button>
                 </Form>
@@ -178,3 +174,5 @@ export default function ProductForm() {
     </div>
   );
 }
+
+export default connect(null, { createProduct })(ProductForm);

@@ -13,7 +13,7 @@ export const remove = id => ({
   id
 });
 
-export const deleteProduct = (product_id) => {
+export const deleteProduct = product_id => {
   return dispatch => {
     return apiCall("delete", `/products/${product_id}`)
       .then(() => dispatch(remove(product_id)))
@@ -34,14 +34,10 @@ export const fetchProducts = () => {
   };
 };
 
-
-export const postNewMessage = text => (dispatch, getState) => {
-//   let { currentUser } = getState();
-
-//   const id = currentUser.user.id;
-
-  // use that id in the api call
-  return apiCall("post", `/products`, { text })
-    .then(res => {})
-    .catch(err => dispatch(addError(err.message)));
+export const createProduct = productData => {
+  return dispatch => {
+    return apiCall("post", `/products`, { productData })
+      .then(res => {})
+      .catch(err => dispatch(addError(err.message)));
+  };
 };
