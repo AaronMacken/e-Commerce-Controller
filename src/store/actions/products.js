@@ -1,6 +1,6 @@
 import { apiCall } from "../../services/api";
 import { addError } from "./error";
-import { LOAD_PRODUCTS, DELETE_PRODUCT } from "../actionTypes";
+import { LOAD_PRODUCTS, UPDATE_PRODUCT, DELETE_PRODUCT } from "../actionTypes";
 
 // action creators
 export const loadProducts = products => ({
@@ -8,15 +8,20 @@ export const loadProducts = products => ({
   products
 });
 
+export const update = id => ({
+  type: UPDATE_PRODUCT,
+  id
+});
+
 export const remove = id => ({
   type: DELETE_PRODUCT,
   id
 });
 
-export const deleteProduct = product_id => {
+export const createProduct = productData => {
   return dispatch => {
-    return apiCall("delete", `/products/${product_id}`)
-      .then(() => dispatch(remove(product_id)))
+    return apiCall("post", `/products`, { productData })
+      .then(res => {})
       .catch(err => dispatch(addError(err.message)));
   };
 };
@@ -33,10 +38,18 @@ export const fetchProducts = () => {
   };
 };
 
-export const createProduct = productData => {
+export const updateProduct = product_id => {
   return dispatch => {
-    return apiCall("post", `/products`, { productData })
+    return apiCall(`put", "/products/${product_id}`)
       .then(res => {})
+      .catch(err => dispatch(addError(err.message)));
+  };
+};
+
+export const deleteProduct = product_id => {
+  return dispatch => {
+    return apiCall("delete", `/products/${product_id}`)
+      .then(() => dispatch(remove(product_id)))
       .catch(err => dispatch(addError(err.message)));
   };
 };

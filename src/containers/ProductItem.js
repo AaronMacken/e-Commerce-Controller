@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import "./ProductItem.css";
 import CloseBtn from "../components/CloseBtn";
 import { Typography } from "@material-ui/core";
-import { deleteProduct } from "../store/actions/products";
+import { deleteProduct, updateProduct } from "../store/actions/products";
 import { connect } from "react-redux";
 
 class ProductItem extends Component {
   render() {
-    const { img, price, title, index, deleteProduct } = this.props;
+    const { img, price, title, index, deleteProduct, updateProduct } = this.props;
     let removeItem = () => {
       deleteProduct(index);
     };
@@ -46,4 +46,4 @@ class ProductItem extends Component {
 
 // export default ProductItem;
 
-export default connect(null, { deleteProduct })(ProductItem);
+export default connect(null, { deleteProduct, updateProduct })(ProductItem);
