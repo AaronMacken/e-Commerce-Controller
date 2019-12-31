@@ -21,7 +21,6 @@ export const deleteProduct = product_id => {
   };
 };
 
-// redux thunk - function that returns a dispatch
 export const fetchProducts = () => {
   return dispatch => {
     return apiCall("get", "/products")

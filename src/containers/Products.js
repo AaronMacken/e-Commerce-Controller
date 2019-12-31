@@ -39,13 +39,16 @@ const useStyles = makeStyles(theme => ({
 
 function Products(props) {
   // props coming from mapstatetoprops / mapdispatchtoprops
-  const { fetchProducts, deleteProduct, products } = props;
+  const { fetchProducts, products } = props;
+
   // hook for adding styles
   const classes = useStyles();
+
   // hook to make api request to get all products in the database
   useEffect(() => {
     fetchProducts();
   }, []);
+
   const productList = products.map(p => (
     <Grid item xs={12} className={classes.gridItem}>
       <Paper>
@@ -53,7 +56,7 @@ function Products(props) {
           img="https://hemp-xr.com/wp-content/uploads/2019/12/hemp-xr-oil.jpg"
           price={p.price}
           title={p.title}
-          key={p._id}
+          index={p._id}
         />
       </Paper>
     </Grid>
@@ -111,6 +114,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchProducts, deleteProduct })(
+export default connect(mapStateToProps, { fetchProducts })(
   Products
 );

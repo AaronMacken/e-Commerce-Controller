@@ -1,34 +1,16 @@
 import React, { Component } from "react";
 import "./ProductItem.css";
 import CloseBtn from "../components/CloseBtn";
-import { Typography, Divider, Box } from "@material-ui/core";
-// import CloseBtn from "../../components/CloseBtn/CloseBtn";
-// import { connect } from "react-redux";
-// import { removeItem, increaseQty, decreaseQty } from "../../store/actions/itemActions";
+import { Typography } from "@material-ui/core";
+import { deleteProduct } from "../store/actions/products";
+import { connect } from "react-redux";
 
-class CartItem extends Component {
-  //   constructor(props) {
-  //     super(props);
-  //     this.removeFromCart = this.removeFromCart.bind(this);
-  //     this.increaseQuantity = this.increaseQuantity.bind(this);
-  //     this.decreaseQuantity = this.decreaseQuantity.bind(this);
-  //   }
-
-  // calls action from props that removes an index from the array
-  //   removeFromCart() {
-  //     this.props.removeItem(this.props.index);
-  //   }
-
-  //   increaseQuantity() {
-  //     this.props.increaseQty(this.props.index);
-  //   }
-
-  //   decreaseQuantity() {
-  //     this.props.decreaseQty(this.props.index);
-  //   }
-
+class ProductItem extends Component {
   render() {
-    const { title, price, img, index } = this.props;
+    const { img, price, title, index, deleteProduct } = this.props;
+    let removeItem = () => {
+      deleteProduct(index);
+    };
     return (
       <div className="cart-item" key={index}>
         <img className="cart-item-img" src={`${img}`}></img>
@@ -53,12 +35,15 @@ class CartItem extends Component {
         </div>
         <div className="buttonsContainer">
           <i class="far fa-edit"></i>
-          <CloseBtn classname="cart-item-close">X</CloseBtn>
+          <CloseBtn classname="cart-item-close" onClick={removeItem}>
+            X
+          </CloseBtn>
         </div>
       </div>
     );
   }
 }
 
-export default CartItem;
-// export default connect(null, { removeItem, increaseQty, decreaseQty })(CartItem);
+// export default ProductItem;
+
+export default connect(null, { deleteProduct })(ProductItem);

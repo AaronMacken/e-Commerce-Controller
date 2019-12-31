@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import Navbar from "../components/Navbar";
 import { Paper, Typography, Container, Box } from "@material-ui/core";
 import { createProduct } from "../store/actions/products";
+import { removeError } from "../store/actions/error";
 import { connect } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
@@ -77,8 +78,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function ProductForm(props) {
-  const { history, createProduct } = props;
+  const { history, createProduct, removeError, errors } = props;
+
   const classes = useStyles();
+
+  // listen for a change in the route, if so -> use remove Error
+  history.listen(() => {
+    removeError();
+  });
+
   return (
     <div className={classes.root}>
       <Navbar />
@@ -117,11 +125,13 @@ function ProductForm(props) {
                   .typeError("You must enter a number")
                   .positive("Must be a positive number")
               })}
-
               onSubmit={(values, { resetForm }) => {
-                createProduct({title: values.productName, price: values.price});
+                createProduct({
+                  title: values.productName,
+                  price: values.price
+                });
                 resetForm({});
-                history.push('/products');
+                history.push("/products");
               }}
             >
               {() => (
@@ -161,7 +171,9 @@ function ProductForm(props) {
                       className={classes.errors}
                     />
                   </Box>
-
+                  {errors.message && (
+                    <div style={{ color: "red" }}>{errors.message}</div>
+                  )}
                   <button type="submit" className={classes.submitButton}>
                     Submit
                   </button>
@@ -175,4 +187,11 @@ function ProductForm(props) {
   );
 }
 
-export default connect(null, { createProduct })(ProductForm);
+// make messages held in state available as props
+function mapStateToProps(state) {
+  return {
+    errors: state.errors
+  };
+}
+
+export default connect(mapStateToProps, { createProduct, removeError })(ProductForm);
