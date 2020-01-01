@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function ProductForm(props) {
-  const { history, createProduct, removeError, errors } = props;
+  const { history, createProduct, removeError, errors, formData } = props;
 
   const classes = useStyles();
 
@@ -86,6 +86,9 @@ function ProductForm(props) {
   history.listen(() => {
     removeError();
   });
+
+  let formTitle = (formData ? "Edit Product" : "New Product");
+  let formSubTitle = (formData ? "Modify product data" : "Add item to online inventory")
 
   return (
     <div className={classes.root}>
@@ -100,7 +103,7 @@ function ProductForm(props) {
             align="center"
             className={classes.title}
           >
-            New Product
+            {formTitle}
           </Typography>
           <Typography
             display="block"
@@ -108,7 +111,7 @@ function ProductForm(props) {
             color="textSecondary"
             align="center"
           >
-            Add item to online inventory
+            {formSubTitle}
           </Typography>
         </div>
         <Container maxWidth="md" className={classes.container}>

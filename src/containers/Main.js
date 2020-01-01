@@ -3,13 +3,14 @@ import { Switch, Route, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import Products from "./Products";
 import ProductForm from "../components/ProductForm";
+import ProductFormEdit from '../containers/ProductFormEdit';
 import AuthForm from "./AuthForm";
 import { authUser } from "../store/actions/auth";
 import { removeError } from "../store/actions/error";
 import withAuth from "../hocs/withAuth";
 
 const Main = props => {
-  const { authUser, errors, removeError, currentUser } = props;
+  const { authUser, errors, removeError } = props;
   return (
     <Switch>
       {/* Render a component along with the react router props */}
@@ -56,6 +57,7 @@ const Main = props => {
   (a function that wraps a component) */}
       <Route exact path="/products" component={withAuth(Products)} />
       <Route exact path="/products/new" component={withAuth(ProductForm)} />
+      <Route exact path="/products/edit/:product_id" component={withAuth(ProductFormEdit)} />
     </Switch>
   );
 };

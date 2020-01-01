@@ -5,7 +5,7 @@ import Container from "@material-ui/core/Container";
 import { Grid, Paper, Input, Typography } from "@material-ui/core";
 import ProductItem from "./ProductItem";
 import { connect } from "react-redux";
-import { fetchProducts, deleteProduct } from "../store/actions/products";
+import { fetchProducts } from "../store/actions/products";
 
 // style hooks
 const useStyles = makeStyles(theme => ({
