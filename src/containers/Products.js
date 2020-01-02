@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -44,12 +44,20 @@ function Products(props) {
   // hook for adding styles
   const classes = useStyles();
 
+  // use state hook
+  const [value, setValue] = useState("");
+
   // hook to make api request to get all products in the database
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  const productList = products.map(p => (
+  let filteredProducts = products.filter(product => {
+    return product.title.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+  });
+
+  // create JSX based off of filtered products available via redux stat -> props
+  let productList = filteredProducts.map(p => (
     <Grid item xs={12} className={classes.gridItem}>
       <Paper>
         <ProductItem
@@ -96,6 +104,8 @@ function Products(props) {
               <Input
                 placeholder="Search Products"
                 className={classes.searchBar}
+                value={value}
+                onChange={e => setValue(e.target.value)}
               ></Input>
             </Grid>
             {/* product items */}
@@ -114,6 +124,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchProducts })(
-  Products
-);
+export default connect(mapStateToProps, { fetchProducts })(Products);
