@@ -1,8 +1,18 @@
 import { apiCall } from "../../services/api";
 import { addError } from "./error";
-import { LOAD_PRODUCTS, UPDATE_PRODUCT, DELETE_PRODUCT } from "../actionTypes";
+import {
+  CREATE_PRODUCT,
+  LOAD_PRODUCTS,
+  UPDATE_PRODUCT,
+  DELETE_PRODUCT
+} from "../actionTypes";
 
 // action creators
+export const handleAdd = product => ({
+  type: CREATE_PRODUCT,
+  product
+});
+
 export const loadProducts = products => ({
   type: LOAD_PRODUCTS,
   products
@@ -21,7 +31,9 @@ export const remove = id => ({
 export const createProduct = productData => {
   return dispatch => {
     return apiCall("post", `/products`, { productData })
-      .then(res => {})
+      .then(productData => {
+        dispatch(handleAdd(productData));
+      })
       .catch(err => dispatch(addError(err.message)));
   };
 };

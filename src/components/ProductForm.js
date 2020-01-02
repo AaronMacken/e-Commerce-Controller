@@ -87,14 +87,17 @@ function ProductForm(props) {
     removeError();
   });
 
-
   // Conditional variables for form values and titles
   let formTitle = formData ? "Edit Product" : "New Product";
   let formSubTitle = formData
     ? "Modify product data"
     : "Add item to online inventory";
-  let productNamePH = formData ? `Current Product Name: ${formData[0]}` : 'Cool Beans Dude';
-  let productPricePH = formData ? `Current Product Price: ${formData[1]}` : '9.99';
+  let productNamePH = formData
+    ? `Current Product Name: ${formData[0]}`
+    : "Cool Beans Dude";
+  let productPricePH = formData
+    ? `Current Product Price: ${formData[1]}`
+    : "9.99";
 
   useEffect(() => {
     console.log(formData);
