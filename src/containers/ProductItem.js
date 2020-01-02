@@ -4,6 +4,7 @@ import CloseBtn from "../components/CloseBtn";
 import { Typography } from "@material-ui/core";
 import { deleteProduct, updateProduct } from "../store/actions/products";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
 
 class ProductItem extends Component {
   render() {
@@ -12,6 +13,7 @@ class ProductItem extends Component {
       deleteProduct(index);
     };
     return (
+      
       <div className="cart-item" key={index}>
         <img className="cart-item-img" src={`${img}`}></img>
 
@@ -34,10 +36,15 @@ class ProductItem extends Component {
           </Typography>
         </div>
         <div className="buttonsContainer">
-          <i class="far fa-edit"></i>
+
+          <Link to={`/products/edit/${index}`}>
+            <i class="far fa-edit"></i>
+          </Link>
+
           <CloseBtn classname="cart-item-close" onClick={removeItem}>
             X
           </CloseBtn>
+         
         </div>
       </div>
     );

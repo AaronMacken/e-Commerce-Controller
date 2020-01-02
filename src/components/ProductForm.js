@@ -79,7 +79,7 @@ const useStyles = makeStyles(theme => ({
 
 function ProductForm(props) {
   const { history, createProduct, removeError, errors, formData } = props;
-
+  const path = props.match.params.product_id;
   const classes = useStyles();
 
   // listen for a change in the route, if so -> use remove Error
@@ -89,7 +89,7 @@ function ProductForm(props) {
 
   let formTitle = (formData ? "Edit Product" : "New Product");
   let formSubTitle = (formData ? "Modify product data" : "Add item to online inventory")
-
+  
   return (
     <div className={classes.root}>
       <Navbar />
@@ -177,6 +177,7 @@ function ProductForm(props) {
                   {errors.message && (
                     <div style={{ color: "red" }}>{errors.message}</div>
                   )}
+                  {path}
                   <button type="submit" className={classes.submitButton}>
                     Submit
                   </button>
