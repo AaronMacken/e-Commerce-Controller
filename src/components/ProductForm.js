@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
 import * as Yup from "yup";
 import Navbar from "../components/Navbar";
 import { Paper, Typography, Container, Box } from "@material-ui/core";
-import { createProduct } from "../store/actions/products";
+import { createProduct, updateProduct } from "../store/actions/products";
 import { removeError } from "../store/actions/error";
 import { connect } from "react-redux";
 
@@ -78,7 +78,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function ProductForm(props) {
-  const { history, createProduct, removeError, errors, formData } = props;
+  const {
+    history,
+    createProduct,
+    removeError,
+    errors,
+    updateFormData,
+    updateProduct
+  } = props;
   const path = props.match.params.product_id;
   const classes = useStyles();
 
@@ -88,20 +95,16 @@ function ProductForm(props) {
   });
 
   // Conditional variables for form values and titles
-  let formTitle = formData ? "Edit Product" : "New Product";
-  let formSubTitle = formData
+  let formTitle = updateFormData ? "Edit Product" : "New Product";
+  let formSubTitle = updateFormData
     ? "Modify product data"
     : "Add item to online inventory";
-  let productNamePH = formData
-    ? `Current Product Name: ${formData[0]}`
+  let productNamePH = updateFormData
+    ? `Current Product Name: ${updateFormData[0]}`
     : "Cool Beans Dude";
-  let productPricePH = formData
-    ? `Current Product Price: ${formData[1]}`
+  let productPricePH = updateFormData
+    ? `Current Product Price: ${updateFormData[1]}`
     : "9.99";
-
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
 
   return (
     <div className={classes.root}>
@@ -142,10 +145,18 @@ function ProductForm(props) {
                   .positive("Must be a positive number")
               })}
               onSubmit={(values, { resetForm }) => {
-                createProduct({
-                  title: values.productName,
-                  price: values.price
-                });
+                if (updateFormData) {
+                  updateProduct(path, {
+                    title: values.productName,
+                    price: values.price
+                  });
+                } else {
+                  createProduct({
+                    title: values.productName,
+                    price: values.price
+                  });
+                }
+
                 resetForm({});
                 history.push("/products");
               }}
@@ -210,6 +221,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { createProduct, removeError })(
-  ProductForm
-);
+export default connect(mapStateToProps, {
+  createProduct,
+  removeError,
+  updateProduct
+})(ProductForm);

@@ -25,6 +25,6 @@ export default class ProductFormEdit extends Component {
     }
   }
   render() {
-    return <ProductForm {...this.props} formData={[this.state.productName, this.state.price]} />;
+    return <ProductForm {...this.props} updateFormData={[this.state.productName, this.state.price]} />;
   }
 }

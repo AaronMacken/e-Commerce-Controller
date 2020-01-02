@@ -18,9 +18,9 @@ export const loadProducts = products => ({
   products
 });
 
-export const update = id => ({
+export const handleUpdate = product => ({
   type: UPDATE_PRODUCT,
-  id
+  product
 });
 
 export const remove = id => ({
@@ -50,10 +50,10 @@ export const fetchProducts = () => {
   };
 };
 
-export const updateProduct = product_id => {
+export const updateProduct = (path, payload) => {
   return dispatch => {
-    return apiCall(`put", "/products/${product_id}`)
-      .then(res => {})
+    return apiCall("put", `/products/${path}`, { payload })
+      .then(updatedProduct => dispatch(handleUpdate(updatedProduct)))
       .catch(err => dispatch(addError(err.message)));
   };
 };
