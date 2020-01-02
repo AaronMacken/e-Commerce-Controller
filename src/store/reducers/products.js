@@ -5,7 +5,7 @@ export const products = (state = [], action) => {
     case LOAD_PRODUCTS:
       return [...action.products];
     case CREATE_PRODUCT:
-      console.log([...state, action.product])
+      return [...state, action.product]
     case DELETE_PRODUCT:
       return state.filter(product => product._id !== action.id);
     default:
