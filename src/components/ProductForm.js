@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
 import * as Yup from "yup";
@@ -87,9 +87,19 @@ function ProductForm(props) {
     removeError();
   });
 
-  let formTitle = (formData ? "Edit Product" : "New Product");
-  let formSubTitle = (formData ? "Modify product data" : "Add item to online inventory")
-  
+
+  // Conditional variables for form values and titles
+  let formTitle = formData ? "Edit Product" : "New Product";
+  let formSubTitle = formData
+    ? "Modify product data"
+    : "Add item to online inventory";
+  let productNamePH = formData ? `Current Product Name: ${formData[0]}` : 'Cool Beans Dude';
+  let productPricePH = formData ? `Current Product Price: ${formData[1]}` : '9.99';
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
   return (
     <div className={classes.root}>
       <Navbar />
@@ -147,7 +157,7 @@ function ProductForm(props) {
                       className={classes.myInput}
                       type="text"
                       name="productName"
-                      placeholder="Cool Beans Dude"
+                      placeholder={productNamePH}
                     />
                     <ErrorMessage
                       name="productName"
@@ -164,7 +174,7 @@ function ProductForm(props) {
                       className={classes.myInput}
                       type="number"
                       name="price"
-                      placeholder="9.99"
+                      placeholder={productPricePH}
                       step="0.01"
                       min="0"
                     />
@@ -177,7 +187,6 @@ function ProductForm(props) {
                   {errors.message && (
                     <div style={{ color: "red" }}>{errors.message}</div>
                   )}
-                  {path}
                   <button type="submit" className={classes.submitButton}>
                     Submit
                   </button>
@@ -198,4 +207,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { createProduct, removeError })(ProductForm);
+export default connect(mapStateToProps, { createProduct, removeError })(
+  ProductForm
+);
