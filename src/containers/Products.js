@@ -7,6 +7,7 @@ import ProductItem from "./ProductItem";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/actions/products";
 
+
 // style hooks
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,7 +35,18 @@ const useStyles = makeStyles(theme => ({
   },
   gridItem: {
     margin: "auto"
-  }
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
 }));
 
 function Products(props) {

@@ -32,7 +32,15 @@
 
 .fa-edit:hover {
   color: rgb(236, 201, 0);
-  
+}
+
+.fa-edit {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.buttonsContainer {
+  display: flex;
 }
 
 @media only screen and (max-width: 975px) {

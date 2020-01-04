@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useInput } from "../services/useInputHook";
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -32,6 +33,8 @@ const useStyles = makeStyles(theme => ({
 export default function SignIn(props) {
   const classes = useStyles();
   const { heading, buttonText, signUp, errors, history, removeError } = props;
+
+  let reRoutePath = (signUp ? "/signin" : "/signup");
 
   const {
     value: username,
@@ -76,9 +79,12 @@ export default function SignIn(props) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <Link to={reRoutePath}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+        </Link>
+
         <Typography component="h1" variant="h5">
           {heading}
         </Typography>

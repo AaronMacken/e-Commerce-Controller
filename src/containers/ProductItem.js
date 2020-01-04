@@ -1,19 +1,16 @@
 import React, { Component } from "react";
 import "./ProductItem.css";
-import CloseBtn from "../components/CloseBtn";
 import { Typography } from "@material-ui/core";
-import { deleteProduct, updateProduct } from "../store/actions/products";
+import { updateProduct } from "../store/actions/products";
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
+import TransitionsModal from './TransitionsModal';
 
 class ProductItem extends Component {
   render() {
-    const { img, price, title, index, deleteProduct, updateProduct } = this.props;
-    let removeItem = () => {
-      deleteProduct(index);
-    };
+    const { img, price, title, index } = this.props;
     return (
-      
+
       <div className="cart-item" key={index}>
         <img className="cart-item-img" src={`${img}`}></img>
 
@@ -40,17 +37,10 @@ class ProductItem extends Component {
           <Link to={`/products/edit/${index}`}>
             <i class="far fa-edit"></i>
           </Link>
-
-          <CloseBtn classname="cart-item-close" onClick={removeItem}>
-            X
-          </CloseBtn>
-         
+          <TransitionsModal index={index} />
         </div>
       </div>
     );
   }
 }
-
-// export default ProductItem;
-
-export default connect(null, { deleteProduct, updateProduct })(ProductItem);
+export default ProductItem;

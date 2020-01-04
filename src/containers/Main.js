@@ -8,6 +8,7 @@ import AuthForm from "./AuthForm";
 import { authUser } from "../store/actions/auth";
 import { removeError } from "../store/actions/error";
 import withAuth from "../hocs/withAuth";
+import NotFound from '../components/NotFound';
 
 const Main = props => {
   const { authUser, errors, removeError } = props;
@@ -58,6 +59,7 @@ const Main = props => {
       <Route exact path="/products" component={withAuth(Products)} />
       <Route exact path="/products/new" component={withAuth(ProductForm)} />
       <Route exact path="/products/edit/:product_id" component={withAuth(ProductFormEdit)} />
+      <Route path="*" component={NotFound} />
     </Switch>
   );
 };
