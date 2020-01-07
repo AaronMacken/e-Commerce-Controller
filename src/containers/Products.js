@@ -73,7 +73,7 @@ function Products(props) {
     <Grid item xs={12} className={classes.gridItem} key={p._id}>
       <Paper>
         <ProductItem
-          img="https://hemp-xr.com/wp-content/uploads/2019/12/hemp-xr-oil.jpg"
+          img={p.productImage}
           price={p.price}
           title={p.title}
           index={p._id}
