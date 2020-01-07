@@ -97,7 +97,6 @@ function ProductForm(props) {
     setImage(file);
   };
 
-
   const handleSubmit = evt => {
     evt.preventDefault();
     if (updateFormData) {
@@ -108,7 +107,7 @@ function ProductForm(props) {
     } else {
       const formData = new FormData();
       formData.append("productImage", image);
-      formData.append("title", title)
+      formData.append("title", title);
       formData.append("price", price);
       createProduct(formData);
     }
@@ -133,6 +132,21 @@ function ProductForm(props) {
   let productPricePH = updateFormData
     ? `Current Product Price: ${updateFormData[1]}`
     : "9.99";
+
+  let imageUpload = !updateFormData ? (
+    <Box className={classes.inputWrapper}>
+      <label htmlFor="productImage" className={classes.myLabel}>
+        Image
+      </label>
+      <input
+        name="productImage"
+        type="file"
+        className={classes.myInput}
+        onChange={fileChangedHandler}
+        required
+      />
+    </Box>
+  ) : null;
 
   return (
     <div className={classes.root}>
@@ -197,18 +211,7 @@ function ProductForm(props) {
                 />
               </Box>
 
-              <Box className={classes.inputWrapper}>
-                <label htmlFor="productImage" className={classes.myLabel}>
-                  Image
-                </label>
-                <input
-                  name="productImage"
-                  type="file"
-                  className={classes.myInput}
-                  onChange={fileChangedHandler}
-                  required
-                />
-              </Box>
+              {imageUpload}
               <button type="submit" className={classes.submitButton}>
                 Submit
               </button>
