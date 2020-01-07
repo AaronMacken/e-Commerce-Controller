@@ -8,13 +8,13 @@ import { connect } from "react-redux";
 export default function withAuth(ComponentToBeRendered) {
   class Authenticate extends Component {
     // if user is not logged in, use react router to push to / - sign in page -
-    componentWillMount() {
+    componentDidMount() {
       if (!this.props.isAuthenticated) {
         this.props.history.push("/");
       }
     }
     // if component updates and still not authenticated, push to sign in again
-    componentWillUpdate(nextProps) {
+    componentDidUpdate(nextProps) {
       if (!nextProps.isAuthenticated) {
         this.props.history.push("/");
       }

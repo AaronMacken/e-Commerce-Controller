@@ -1,7 +1,5 @@
-import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import * as Yup from "yup";
 import Navbar from "../components/Navbar";
 import { Paper, Typography, Container, Box } from "@material-ui/core";
 import { createProduct, updateProduct } from "../store/actions/products";
@@ -86,8 +84,38 @@ function ProductForm(props) {
     updateFormData,
     updateProduct
   } = props;
+
   const path = props.match.params.product_id;
   const classes = useStyles();
+
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  const [image, setImage] = useState();
+
+  const fileChangedHandler = event => {
+    const file = event.target.files[0];
+    setImage(file);
+  };
+
+
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    if (updateFormData) {
+      updateProduct(path, {
+        title: title,
+        price: price
+      });
+    } else {
+      const formData = new FormData();
+      formData.append("productImage", image);
+      formData.append("title", title)
+      formData.append("price", price);
+      createProduct(formData);
+    }
+    setTitle("");
+    setPrice("");
+    history.push("/products");
+  };
 
   // listen for a change in the route, if so -> use remove Error
   history.listen(() => {
@@ -123,7 +151,7 @@ function ProductForm(props) {
           </Typography>
           <Typography
             display="block"
-            variant="p"
+            variant="body1"
             color="textSecondary"
             align="center"
           >
@@ -132,81 +160,59 @@ function ProductForm(props) {
         </div>
         <Container maxWidth="md" className={classes.container}>
           <Paper className={classes.formPaper}>
-            <Formik
-              initialValues={{
-                productName: "",
-                price: null
-              }}
-              validationSchema={Yup.object({
-                productName: Yup.string().required("Required"),
-                price: Yup.number()
-                  .required("Required")
-                  .typeError("You must enter a number")
-                  .positive("Must be a positive number")
-              })}
-              onSubmit={(values, { resetForm }) => {
-                if (updateFormData) {
-                  updateProduct(path, {
-                    title: values.productName,
-                    price: values.price
-                  });
-                } else {
-                  createProduct({
-                    title: values.productName,
-                    price: values.price
-                  });
-                }
+            <form className={classes.formColumn} onSubmit={handleSubmit}>
+              <Box className={classes.inputWrapper}>
+                <label htmlFor="productName" className={classes.myLabel}>
+                  Product
+                </label>
+                <input
+                  type="text"
+                  name="productName"
+                  placeholder={productNamePH}
+                  className={classes.myInput}
+                  value={title}
+                  onChange={e => {
+                    setTitle(e.target.value);
+                  }}
+                  required
+                />
+              </Box>
 
-                resetForm({});
-                history.push("/products");
-              }}
-            >
-              {() => (
-                <Form className={classes.formColumn}>
-                  <Box className={classes.inputWrapper}>
-                    <label htmlFor="productName" className={classes.myLabel}>
-                      Product
-                    </label>
-                    <Field
-                      className={classes.myInput}
-                      type="text"
-                      name="productName"
-                      placeholder={productNamePH}
-                    />
-                    <ErrorMessage
-                      name="productName"
-                      component="div"
-                      className={classes.errors}
-                    />
-                  </Box>
+              <Box className={classes.inputWrapper}>
+                <label htmlFor="price" className={classes.myLabel}>
+                  Product
+                </label>
+                <input
+                  type="number"
+                  name="price"
+                  step="0.01"
+                  min="0"
+                  value={price}
+                  onChange={e => {
+                    setPrice(e.target.value);
+                  }}
+                  className={classes.myInput}
+                  placeholder={productPricePH}
+                  required
+                />
+              </Box>
 
-                  <Box className={classes.inputWrapper}>
-                    <label htmlFor="price" className={classes.myLabel}>
-                      Price
-                    </label>
-                    <Field
-                      className={classes.myInput}
-                      type="number"
-                      name="price"
-                      placeholder={productPricePH}
-                      step="0.01"
-                      min="0"
-                    />
-                    <ErrorMessage
-                      name="price"
-                      component="div"
-                      className={classes.errors}
-                    />
-                  </Box>
-                  {errors.message && (
-                    <div style={{ color: "red" }}>{errors.message}</div>
-                  )}
-                  <button type="submit" className={classes.submitButton}>
-                    Submit
-                  </button>
-                </Form>
-              )}
-            </Formik>
+              <Box className={classes.inputWrapper}>
+                <label htmlFor="productImage" className={classes.myLabel}>
+                  Image
+                </label>
+                <input
+                  name="productImage"
+                  type="file"
+                  className={classes.myInput}
+                  onChange={fileChangedHandler}
+                  required
+                />
+              </Box>
+              <button type="submit" className={classes.submitButton}>
+                Submit
+              </button>
+            </form>
           </Paper>
         </Container>
       </main>

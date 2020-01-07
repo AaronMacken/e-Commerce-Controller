@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar";
 import Main from "./Main";
 import { Provider } from "react-redux";
 import { configureStore } from "../store";

@@ -62,7 +62,7 @@ function Products(props) {
   // hook to make api request to get all products in the database
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
 
   let filteredProducts = products.filter(product => {
     return product.title.toLowerCase().indexOf(value.toLowerCase()) !== -1;
@@ -70,7 +70,7 @@ function Products(props) {
 
   // create JSX based off of filtered products available via redux stat -> props
   let productList = filteredProducts.map(p => (
-    <Grid item xs={12} className={classes.gridItem}>
+    <Grid item xs={12} className={classes.gridItem} key={p._id}>
       <Paper>
         <ProductItem
           img="https://hemp-xr.com/wp-content/uploads/2019/12/hemp-xr-oil.jpg"
@@ -100,7 +100,7 @@ function Products(props) {
           </Typography>
           <Typography
             display="block"
-            variant="p"
+            variant="body1"
             color="textSecondary"
             align="center"
           >

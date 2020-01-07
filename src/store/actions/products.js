@@ -28,9 +28,9 @@ export const remove = id => ({
   id
 });
 
-export const createProduct = productData => {
+export const createProduct = (productData) => {
   return dispatch => {
-    return apiCall("post", `/products`, { productData })
+    return apiCall("post", `/products`, productData)
       .then(productData => {
         dispatch(handleAdd(productData));
       })

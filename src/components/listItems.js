@@ -33,7 +33,7 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <div>
-    <ListItem button>
+    <ListItem button key="1">
       <ListItemIcon>
         <LanguageIcon />
       </ListItemIcon>
