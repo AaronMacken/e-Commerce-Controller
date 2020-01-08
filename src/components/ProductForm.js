@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Navbar from "../components/Navbar";
+import Navbar from "./Navbar";
 import { Paper, Typography, Container, Box } from "@material-ui/core";
 import { createProduct, updateProduct } from "../store/actions/products";
 import { removeError } from "../store/actions/error";
 import { connect } from "react-redux";
+import Thumb from './Thumb';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -212,6 +213,7 @@ function ProductForm(props) {
               </Box>
 
               {imageUpload}
+              <Thumb file={image} />
               <button type="submit" className={classes.submitButton}>
                 Submit
               </button>
