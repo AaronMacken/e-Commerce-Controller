@@ -50,6 +50,9 @@ const useStyles = makeStyles(theme => ({
     color: "var(--gray-800)",
     borderRadius: "10px",
     marginTop: ".5rem",
+    "&:hover": {
+      borderBottom: 'none'
+    },
     "&:focus": {
       outlineColor: "rgba(0, 20, 255)"
     }
