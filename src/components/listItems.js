@@ -33,17 +33,24 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <div>
-    <ListItem button key="1">
-      <ListItemIcon>
-        <LanguageIcon />
-      </ListItemIcon>
-      <ListItemText primary="Visit Store" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <LanguageIcon />
-      </ListItemIcon>
-      <ListItemText primary="Stripe Dashboard" />
-    </ListItem>
+    <a href="localhost:3000/" target="_blank" style={linkStyle}>
+      <ListItem button key="1">
+        <ListItemIcon>
+          <LanguageIcon />
+        </ListItemIcon>
+        <ListItemText primary="Visit Store" />
+      </ListItem>
+    </a>
+
+
+    <a href="https://dashboard.stripe.com/dashboard" target="_blank" style={linkStyle}>
+      <ListItem button>
+        <ListItemIcon>
+          <LanguageIcon />
+        </ListItemIcon>
+        <ListItemText primary="Stripe Dashboard" />
+      </ListItem>
+    </a>
+
   </div>
 );

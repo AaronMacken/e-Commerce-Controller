@@ -36,6 +36,7 @@ const Main = props => {
           );
         }}
       />
+      
       {/* This route contains a signUp prop - used for displaying additional fields on the authform component */}
       <Route
         exact
