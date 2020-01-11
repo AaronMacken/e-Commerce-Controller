@@ -8,7 +8,8 @@ export default class ProductFormEdit extends Component {
 
     this.state = {
       productName: "",
-      price: null
+      price: null,
+      img: ""
     };
   }
 
@@ -18,13 +19,13 @@ export default class ProductFormEdit extends Component {
     let path = this.props.match.params.product_id;
     try {
       apiCall("get", `/products/${path}`).then(formData => {
-        this.setState({ productName: formData.title, price: formData.price });
+        this.setState({ productName: formData.title, price: formData.price.toFixed(2), img: formData.productImage });
       });
     } catch {
       console.log("error");
     }
   }
   render() {
-    return <ProductForm {...this.props} updateFormData={[this.state.productName, this.state.price]} />;
+    return <ProductForm {...this.props} updateFormData={[this.state.productName, this.state.price, this.state.img]} />;
   }
 }

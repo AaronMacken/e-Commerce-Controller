@@ -5,7 +5,7 @@ import { Paper, Typography, Container, Box } from "@material-ui/core";
 import { createProduct, updateProduct } from "../store/actions/products";
 import { removeError } from "../store/actions/error";
 import { connect } from "react-redux";
-import Thumb from './Thumb';
+import Thumb from "./Thumb";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "10px",
     marginTop: ".5rem",
     "&:hover": {
-      borderBottom: 'none'
+      borderBottom: "none"
     },
     "&:focus": {
       outlineColor: "rgba(0, 20, 255)"
@@ -131,11 +131,9 @@ function ProductForm(props) {
     ? "Modify product data"
     : "Add item to online inventory";
   let productNamePH = updateFormData
-    ? `Current Product Name: ${updateFormData[0]}`
-    : "Cool Beans Dude";
-  let productPricePH = updateFormData
-    ? `Current Product Price: ${updateFormData[1]}`
-    : "9.99";
+    ? `"${updateFormData[0]}"`
+    : `"Cool Beans Dude"`;
+  let productPricePH = updateFormData ? `$${updateFormData[1]}` : `$9.99`;
 
   let imageUpload = !updateFormData ? (
     <Box className={classes.inputWrapper}>
@@ -150,7 +148,15 @@ function ProductForm(props) {
         required
       />
     </Box>
-  ) : null;
+  ) : (
+    <img
+      src={`http://localhost:3001/${updateFormData[2]}`}
+      alt={`${updateFormData[0]}`}
+      className="img-thumbnail mt-2"
+      height={200}
+      width={200}
+    />
+  );
 
   return (
     <div className={classes.root}>
@@ -198,7 +204,7 @@ function ProductForm(props) {
 
               <Box className={classes.inputWrapper}>
                 <label htmlFor="price" className={classes.myLabel}>
-                  Product
+                  Price
                 </label>
                 <input
                   type="number"
