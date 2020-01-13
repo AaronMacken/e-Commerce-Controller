@@ -33,7 +33,7 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <div>
-    <a href="localhost:3000/" target="_blank" style={linkStyle}>
+    <a href="localhost:3000/" target="_blank" rel="noopener noreferrer" style={linkStyle}>
       <ListItem button key="1">
         <ListItemIcon>
           <LanguageIcon />
@@ -43,7 +43,7 @@ export const secondaryListItems = (
     </a>
 
 
-    <a href="https://dashboard.stripe.com/dashboard" target="_blank" style={linkStyle}>
+    <a href="https://dashboard.stripe.com/dashboard" target="_blank" rel="noopener noreferrer" style={linkStyle}>
       <ListItem button>
         <ListItemIcon>
           <LanguageIcon />

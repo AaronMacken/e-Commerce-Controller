@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Navbar from "./Navbar";
 import { Paper, Typography, Container, Box } from "@material-ui/core";
 import { createProduct, updateProduct } from "../store/actions/products";
-import { removeError } from "../store/actions/error";
 import { connect } from "react-redux";
 import Thumb from "./Thumb";
 
@@ -61,10 +60,6 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column"
   },
-  errors: {
-    color: "red",
-    marginLeft: ".5rem"
-  },
   submitButton: {
     padding: ".5rem 1.25rem",
     fontSize: "1rem",
@@ -83,8 +78,6 @@ function ProductForm(props) {
   const {
     history,
     createProduct,
-    removeError,
-    errors,
     updateFormData,
     updateProduct
   } = props;
@@ -119,11 +112,6 @@ function ProductForm(props) {
     setPrice("");
     history.push("/products");
   };
-
-  // listen for a change in the route, if so -> use remove Error
-  history.listen(() => {
-    removeError();
-  });
 
   // Conditional variables for form values and titles
   let formTitle = updateFormData ? "Edit Product" : "New Product";
@@ -234,15 +222,8 @@ function ProductForm(props) {
   );
 }
 
-// make messages held in state available as props
-function mapStateToProps(state) {
-  return {
-    errors: state.errors
-  };
-}
 
-export default connect(mapStateToProps, {
+export default connect(null, {
   createProduct,
-  removeError,
   updateProduct
 })(ProductForm);
