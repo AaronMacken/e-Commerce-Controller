@@ -5,7 +5,7 @@
     },
     "proxies": {
         "/api": {
-            "origin": "https://hippie-server-am.herokuapp.com/"
+            "origin": "https://hippie-server-am.herokuapp.com/api"
         },
         "/admin": {
             "origin": "https://hippie-server-am.herokuapp.com/admin"
