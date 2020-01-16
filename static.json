@@ -8,7 +8,7 @@
             "origin": "https://hippie-server-am.herokuapp.com/"
         },
         "/admin": {
-            "origin": "https://hippie-server-am.herokuapp.com/"
+            "origin": "https://hippie-server-am.herokuapp.com/admin"
         }
     }
 }
