@@ -33,7 +33,7 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <div>
-    <a href="localhost:3000/" target="_blank" rel="noopener noreferrer" style={linkStyle}>
+    <a href="https://hippie-house-am.herokuapp.com/" target="_blank" rel="noopener noreferrer" style={linkStyle}>
       <ListItem button key="1">
         <ListItemIcon>
           <LanguageIcon />
