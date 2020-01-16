@@ -4,8 +4,8 @@
         "/**": "index.html"
     },
     "proxies": {
-        "/products": {
-            "origin": "https://hippie-server-am.herokuapp.com/products"
+        "/api": {
+            "origin": "https://hippie-server-am.herokuapp.com/api"
         },
         "/admin": {
             "origin": "https://hippie-server-am.herokuapp.com/admin"

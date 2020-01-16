@@ -18,7 +18,7 @@ export default class ProductFormEdit extends Component {
   componentDidMount() {
     let path = this.props.match.params.product_id;
     try {
-      apiCall("get", `/products/${path}`).then(formData => {
+      apiCall("get", `/api/products/${path}`).then(formData => {
         this.setState({ productName: formData.title, price: formData.price.toFixed(2), img: formData.productImage });
       });
     } catch {

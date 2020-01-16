@@ -30,7 +30,7 @@ export const remove = id => ({
 
 export const createProduct = (productData) => {
   return dispatch => {
-    return apiCall("post", `/products`, productData)
+    return apiCall("post", `/api/products`, productData)
       .then(productData => {
         dispatch(handleAdd(productData));
       })
@@ -40,7 +40,7 @@ export const createProduct = (productData) => {
 
 export const fetchProducts = () => {
   return dispatch => {
-    return apiCall("get", "/products")
+    return apiCall("get", "/api/products")
       .then(products => {
         dispatch(loadProducts(products));
       })
@@ -52,7 +52,7 @@ export const fetchProducts = () => {
 
 export const updateProduct = (path, payload) => {
   return dispatch => {
-    return apiCall("put", `/products/${path}`, { payload })
+    return apiCall("put", `/api/products/${path}`, { payload })
       .then(updatedProduct => dispatch(handleUpdate(updatedProduct)))
       .catch(err => dispatch(addError(err.message)));
   };
@@ -60,7 +60,7 @@ export const updateProduct = (path, payload) => {
 
 export const deleteProduct = product_id => {
   return dispatch => {
-    return apiCall("delete", `/products/${product_id}`)
+    return apiCall("delete", `/api/products/${product_id}`)
       .then(() => dispatch(remove(product_id)))
       .catch(err => dispatch(addError(err.message)));
   };
