@@ -9,9 +9,6 @@
         },
         "/admin": {
             "origin": "https://hippie-server-am.herokuapp.com/admin"
-        },
-        "/uploads": {
-            "origin": "https://hippie-server-am.herokuapp.com/uploads"
         }
     }
 }
