@@ -138,7 +138,7 @@ function ProductForm(props) {
     </Box>
   ) : (
     <img
-      src={`https://hippie-server-am.herokuapp.com/${updateFormData[2]}`}
+      src={`${updateFormData[2]}`}
       alt={`${updateFormData[0]}`}
       className="img-thumbnail mt-2"
       height={200}
