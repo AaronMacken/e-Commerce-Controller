@@ -10,7 +10,7 @@ class ProductItem extends Component {
     return (
 
       <div className="cart-item" key={index}>
-        <img className="cart-item-img" src={`https://hippie-server-am.herokuapp.com/${img}`} alt={title}></img>
+        <img className="cart-item-img" src={`${img}`} alt={title}></img>
 
         <div className="cart-item-col">
           <Typography variant="h6" color="primary" display="inline">
