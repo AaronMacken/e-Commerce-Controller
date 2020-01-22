@@ -13,7 +13,7 @@ class ProductItem extends Component {
         <img className="cart-item-img" src={`${img}`} alt={title}></img>
 
         <div className="cart-item-col">
-          <Typography variant="h6" color="primary" display="inline">
+          <Typography variant="h6" color="primary" display="inline" className="item-data">
             Item Name:{" "}
             {
               <Typography  color="textPrimary" display="inline">
