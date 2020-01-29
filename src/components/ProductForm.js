@@ -87,6 +87,7 @@ function ProductForm(props) {
 
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
   const [image, setImage] = useState();
 
   const fileChangedHandler = event => {
@@ -99,17 +100,20 @@ function ProductForm(props) {
     if (updateFormData) {
       updateProduct(path, {
         title: title,
-        price: price
+        price: price,
+        description: description
       });
     } else {
       const formData = new FormData();
       formData.append("productImage", image);
       formData.append("title", title);
       formData.append("price", price);
+      formData.append("description", description);
       createProduct(formData);
     }
     setTitle("");
     setPrice("");
+    setDescription("");
     history.push("/products");
   };
 
@@ -122,7 +126,7 @@ function ProductForm(props) {
     ? `"${updateFormData[0]}"`
     : `"Cool Beans Dude"`;
   let productPricePH = updateFormData ? `$${updateFormData[1]}` : `$9.99`;
-
+  
   let imageUpload = !updateFormData ? (
     <Box className={classes.inputWrapper}>
       <label htmlFor="productImage" className={classes.myLabel}>
@@ -145,6 +149,7 @@ function ProductForm(props) {
       width={200}
     />
   );
+  let descriptionPH = updateFormData ? `${updateFormData[3]}` : `Details about the product`
 
   return (
     <div className={classes.root}>
@@ -207,6 +212,23 @@ function ProductForm(props) {
                   placeholder={productPricePH}
                   required
                 />
+              </Box>
+
+              <Box className={classes.inputWrapper}>
+                <label htmlFor="description" className={classes.myLabel}>
+                  Product
+                </label>
+
+
+                  <textarea name="description" 
+                  placeholder={descriptionPH} 
+                  className={classes.myInput}
+                  onChange={e => {
+                    setDescription(e.target.value)
+                  }}
+                  >
+                    {description}
+                  </textarea>
               </Box>
 
               {imageUpload}

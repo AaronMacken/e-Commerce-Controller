@@ -9,7 +9,8 @@ export default class ProductFormEdit extends Component {
     this.state = {
       productName: "",
       price: null,
-      img: ""
+      img: "",
+      description: ""
     };
   }
 
@@ -19,13 +20,13 @@ export default class ProductFormEdit extends Component {
     let path = this.props.match.params.product_id;
     try {
       apiCall("get", `/api/products/${path}`).then(formData => {
-        this.setState({ productName: formData.title, price: formData.price.toFixed(2), img: formData.productImage });
+        this.setState({ productName: formData.title, price: formData.price.toFixed(2), img: formData.productImage, description: formData.description });
       });
     } catch {
       console.log("error");
     }
   }
   render() {
-    return <ProductForm {...this.props} updateFormData={[this.state.productName, this.state.price, this.state.img]} />;
+    return <ProductForm {...this.props} updateFormData={[this.state.productName, this.state.price, this.state.img, this.state.description]} />;
   }
 }
