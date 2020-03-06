@@ -20,7 +20,7 @@ export default class ProductFormEdit extends Component {
     let path = this.props.match.params.product_id;
     try {
       apiCall("get", `/api/products/${path}`).then(formData => {
-        this.setState({ productName: formData.title, price: formData.price.toFixed(2), img: formData.productImage, description: formData.description });
+        this.setState({ productName: formData.title, price: formData.price.toFixed(2), img: formData.productImage, description: formData.description, category: formData.category });
       });
     } catch {
       console.log("error");

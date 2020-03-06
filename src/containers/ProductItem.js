@@ -16,7 +16,7 @@ class ProductItem extends Component {
           <Typography variant="h6" color="primary" display="inline" className="item-data">
             Item Name:{" "}
             {
-              <Typography  color="textPrimary" display="inline">
+              <Typography color="textPrimary" display="inline">
                 {title}
               </Typography>
             }
@@ -26,6 +26,14 @@ class ProductItem extends Component {
             {
               <Typography color="textPrimary" display="inline">
                 ${price.toFixed(2)}
+              </Typography>
+            }
+          </Typography>
+          <Typography variant="h6" color="primary" display="inline" className="item-data">
+            Category:{" "}
+            {
+              <Typography color="textPrimary" display="inline">
+                {category}
               </Typography>
             }
           </Typography>

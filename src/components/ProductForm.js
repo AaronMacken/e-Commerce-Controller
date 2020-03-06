@@ -89,6 +89,7 @@ function ProductForm(props) {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState();
+  const [category, setCategory] = useState("");
 
   const fileChangedHandler = event => {
     const file = event.target.files[0];
@@ -101,7 +102,8 @@ function ProductForm(props) {
       updateProduct(path, {
         title: title,
         price: price,
-        description: description
+        description: description,
+        category: category
       });
     } else {
       const formData = new FormData();
@@ -109,11 +111,13 @@ function ProductForm(props) {
       formData.append("title", title);
       formData.append("price", price);
       formData.append("description", description);
+      formData.append("category", category);
       createProduct(formData);
     }
     setTitle("");
     setPrice("");
     setDescription("");
+    setCategory("");
     history.push("/products");
   };
 
@@ -126,7 +130,7 @@ function ProductForm(props) {
     ? `"${updateFormData[0]}"`
     : `"Cool Beans Dude"`;
   let productPricePH = updateFormData ? `$${updateFormData[1]}` : `$9.99`;
-  
+
   let imageUpload = !updateFormData ? (
     <Box className={classes.inputWrapper}>
       <label htmlFor="productImage" className={classes.myLabel}>
@@ -141,14 +145,14 @@ function ProductForm(props) {
       />
     </Box>
   ) : (
-    <img
-      src={`${updateFormData[2]}`}
-      alt={`${updateFormData[0]}`}
-      className="img-thumbnail mt-2"
-      height={200}
-      width={200}
-    />
-  );
+      <img
+        src={`${updateFormData[2]}`}
+        alt={`${updateFormData[0]}`}
+        className="img-thumbnail mt-2"
+        height={200}
+        width={200}
+      />
+    );
   let descriptionPH = updateFormData ? `${updateFormData[3]}` : `Details about the product`
 
   return (
@@ -220,15 +224,37 @@ function ProductForm(props) {
                 </label>
 
 
-                  <textarea name="description" 
-                  placeholder={descriptionPH} 
+                <textarea name="description"
+                  placeholder={descriptionPH}
                   className={classes.myInput}
                   onChange={e => {
                     setDescription(e.target.value)
                   }}
-                  >
-                    {description}
-                  </textarea>
+                >
+                  {description}
+                </textarea>
+              </Box>
+
+              <Box className={classes.inputWrapper}>
+                <label htmlFor="category" className={classes.myLabel}>
+                  Category
+                </label>
+
+                <Select
+                  labelId="category"
+                  id="category-select"
+                  value={category}
+                  onChange={e => {
+                    setCategory(e.target.value)
+                  }}>
+                  <MenuItem value={"Edibles"}>Edibles</MenuItem>
+                  <MenuItem value={"Pet Edibles"}>Pet Edibles</MenuItem>
+                  <MenuItem value={"Topicals"}>Topicals</MenuItem>
+                  <MenuItem value={"Flowers"}>Flowers</MenuItem>
+                  <MenuItem value={"Tinctures"}>Tincture</MenuItem>
+                  <MenuItem value={"Cartridges"}>Cartridges</MenuItem>
+                  <MenuItem value={"Misc"}>Miscellaneous</MenuItem>
+                </Select>
               </Box>
 
               {imageUpload}
