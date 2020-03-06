@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Navbar from "./Navbar";
-import { Paper, Typography, Container, Box } from "@material-ui/core";
+import { Paper, Typography, Container, Box, MenuItem, Select } from "@material-ui/core";
 import { createProduct, updateProduct } from "../store/actions/products";
 import { connect } from "react-redux";
 import Thumb from "./Thumb";
