@@ -77,7 +77,7 @@ function Products(props) {
           price={p.price}
           title={p.title}
           index={p._id}
-          ategory={p.category}
+          category={p.category}
         />
       </Paper>
     </Grid>
