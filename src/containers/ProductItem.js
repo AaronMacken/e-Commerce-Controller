@@ -6,7 +6,7 @@ import TransitionsModal from './TransitionsModal';
 
 class ProductItem extends Component {
   render() {
-    const { img, price, title, index } = this.props;
+    const { img, price, title, index, category } = this.props;
     return (
 
       <div className="cart-item" key={index}>
