@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Navbar from "./Navbar";
 import { Paper, Typography, Container, Box, MenuItem, Select } from "@material-ui/core";
@@ -90,6 +90,14 @@ function ProductForm(props) {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState();
   const [category, setCategory] = useState("");
+
+  useEffect(() => {
+    if (updateFormData) {
+      setTitle(`${props.updateFormData[0]}`)
+      setPrice(`${props.updateFormData[1]}`)
+      setDescription(`${props.updateFormData[3]}`)
+    }
+  }, [updateFormData, props.updateFormData])
 
   const fileChangedHandler = event => {
     const file = event.target.files[0];
@@ -230,8 +238,8 @@ function ProductForm(props) {
                   onChange={e => {
                     setDescription(e.target.value)
                   }}
+                  value={description}
                 >
-                  {description}
                 </textarea>
               </Box>
 
