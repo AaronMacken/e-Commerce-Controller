@@ -259,7 +259,7 @@ function ProductForm(props) {
                   <MenuItem value={"Pet Edibles"}>Pet Edibles</MenuItem>
                   <MenuItem value={"Topicals"}>Topicals</MenuItem>
                   <MenuItem value={"Flowers"}>Flowers</MenuItem>
-                  <MenuItem value={"Tinctures"}>Tincture</MenuItem>
+                  <MenuItem value={"Tinctures"}>Tinctures</MenuItem>
                   <MenuItem value={"Cartridges"}>Cartridges</MenuItem>
                   <MenuItem value={"Misc"}>Miscellaneous</MenuItem>
                 </Select>
